@@ -1,0 +1,132 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Asiakeo - Sushi Asian Food</title>
+    <meta name="description" value="Le goût. Authentique venu d'Asie."/>
+    <meta name="keywords" value="Restaurant asiatique, restaurant sushi, sushi, maki, bo-bun, california, egg, roll, chirashi, sashimi, temaki, noodle box"/>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles-index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fullpage.min.css' %}" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.fullpage.min.js' %}"></script>
+</head>
+
+<body>
+<!--<?php if(isset($image_mini) && !empty($image_mini) && isset($image_hd) && !empty($image_hd)){ ?>-->
+
+
+<!--  <div id="splashscreen">-->
+<!--  <div id="splashcontener">-->
+<!--  <button class="close-splash">x</button>-->
+<!--  <div class="splash-inside">-->
+<!--      <div class="splash-content">-->
+
+<!--      </div>-->
+<!--  </div>-->
+<!--  <div class="info-splash">Cette annonce se fermera automatiquement dans <span>10</span> seconde(s)-->
+<!--  </div>-->
+
+<!--  </div>-->
+  <script>
+  $(document).ready(function() {
+
+    var $timerSpan = $('.info-splash span'),
+        timer = setInterval(function(){ count() }, 1000);
+
+    function count() {
+      var secondsLeft = $timerSpan.text(),
+          newVal = secondsLeft-1;
+
+          if(secondsLeft == 0) {
+            clearInterval(timer);
+            $("#splashscreen").fadeOut('400', function() {
+                $("#splashscreen").remove();
+            });
+          } else {
+            $timerSpan.text(newVal);
+        }
+    }
+    $('.close-splash').on('click', function(event) {
+      event.preventDefault();
+      $("#splashscreen").fadeOut('400', function() {
+          clearInterval(timer);
+          $("#splashscreen").remove();
+      });
+    });
+  });
+  </script>
+  </div>
+<?php } ?>
+<div id="fullpage">
+    <div class="section">
+    <div class="cont left">
+    <div class="table">
+    	<div class="cell">
+        <img src="images/logo_white.png" width="646" height="108" alt="" class="no-show-desktop"/>
+
+    	<h2>Tentez une<br>experience<br>unique.</h2>
+        <a href="<?php echo $url_boutique; ?>" class="commande-ligne">Commandez en ligne</a>
+        </div>
+        <div class="arrow bounce"></div>
+    </div>
+    </div>
+    <div class="cont right no-show-mobile">
+
+     <div class="table">
+    	<div class="cell">
+         <img src="images/logo.png" width="646" height="108" alt=""/>
+    	<h1>Le goût<br>Authentique<br>venu d’asie.</h1>
+        <ul>
+        <li><a href="<?php echo $url_boutique; ?>">La carte</a></li>
+        <li><a href="<?php echo $url_notre_concept; ?>">Notre concept</a></li>
+        <li><a href="<?php echo $url_nos_restaurants; ?>">Nos restaurants</a></li>
+        <li><a href="<?php echo $url_service_consommateur; ?>">Service consommateur</a></li>
+        </ul>
+
+      <!-- <p>Commandez par téléphone<br><span>04 93 67 37 70</span></p> -->
+    </div>
+    </div>
+    </div>
+
+    </div>
+    <div class="section no-show-desktop">
+
+     <div class="cont right">
+
+     <div class="table">
+    	<div class="cell">
+        <img src="images/logo.png" width="646" height="108" alt=""/>
+    	<h1>Le goût<br>Authentique<br>venu d’asie.</h1>
+        <ul>
+        <li><a href="<?php echo $url_boutique; ?>">La carte</a></li>
+        <li><a href="<?php echo $url_notre_concept; ?>">Notre concept</a></li>
+        <li><a href="<?php echo $url_nos_restaurants; ?>">Nos restaurants</a></li>
+        <li><a href="<?php echo $url_service_consommateur; ?>">Service consommateur</a></li>
+        </ul>
+        <!-- <p>Commandez par téléphone<br><span>04 93 67 37 70</span></p> -->
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+
+
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#fullpage').fullpage({fixedElements:"#splashscreen"});
+    $("a.commande-ligne").attr("href", "<?php echo $url_choix_mode_livraison; ?>");
+});
+
+</script>
+
+</body>
+</html>

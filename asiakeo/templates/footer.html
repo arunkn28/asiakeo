@@ -1,0 +1,270 @@
+<!--<?php if(in_array($page, array('panier', 'boutique'))){ ?>-->
+<!--&lt;!&ndash; FORMULE &ndash;&gt;-->
+<!--<div class="overlay overlay-formule">-->
+<!--  <div class="bloc-pdt-table">-->
+<!--    <div class="bloc-pdt-cell">-->
+<!--      <div id="formule"  class=" contener-basket-overlay clearfix">-->
+<!--        <a href="#" class="close">X</a>-->
+<!--        <h2>Veuillez choisir les produits de votre formule</h2>-->
+<!--        <div class="cont-basket-mini">-->
+<!--            <form id="form-formule">-->
+<!--                <div id="form_elements">-->
+
+<!--                </div>-->
+<!--                <button name="add_formule" id="button_add_formule" value="" class="basket-add add_formule btn-formule">Ajouter</button>-->
+<!--                <a href="javascript:void(0);" class="active_click basket-add direc btn-formule">Annuler</a>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<?php } ?>-->
+<footer class="section fp-auto-height clearfix">
+
+<div class="inner-foot">
+
+
+<ul>
+  <li class="clearfix"><i class="mini-icon scooter"></i><span>Livraison à domicile<br /> ou au bureau</span></li>
+  <li class="clearfix"><i class="mini-icon baguette"></i><span>Fraîchement <br /> préparé sur place</span></li>
+  <li class="clearfix"><i class="mini-icon phone"></i><span>Application mobile<br />Appstore et Playstore !</span></li>
+</ul>
+<div class="text-footer">
+  <div class="left-cont">
+    <p>
+      <span>Le goût authentique<br /> venu d'Asie.</span><br />
+
+    </p>
+    <a href="<?php echo $url_recrutement ?>">Recrutement</a> -
+    <a href="<?php echo $url_mentions_legales ?>" >Mentions légales</a> -
+    <a href="<?php echo $url_conditions_generales_de_vente ?>" >CGV</a>
+  </div>
+  <div class="right-cont">
+    <p>
+      <span>Suivez Asiakeo</span><br />
+Retrouvez notre actualité et toutes nos informations sur les réseaux sociaux
+    </p>
+    <a href="https://www.facebook.com/asiakeosushiasianfood/"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+    <a href=" https://www.tripadvisor.fr/Restaurant_Review-g187229-d2370226-Reviews-Asiakeo_Sushi_Asian_Food-Juan_les_Pins_Antibes_French_Riviera_Cote_d_Azur_Provenc.html"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
+    <a href="https://www.instagram.com/asiakeo_insta/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+
+  </div>
+
+</div>
+
+</div>
+
+
+
+</footer>
+</div>
+
+</div>
+<script>
+    window.cookieconsent_options = {
+        message : "En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies afin de vous garantir une experience optimale",
+        dismiss : "J'ai compris !",
+        learnMore : "Plus d'info",
+        link : "<?php echo $url_mentions_legales; ?>",
+        theme : "<?php echo URL_CSS; ?>cookies.css"
+    };
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+
+<?php
+$footer_js['file'] = array_unique($footer_js['file']);
+foreach($footer_js['file'] as $js_file)
+{
+    echo '<script type="text/javascript" src="'.$js_file.'"></script>'."\n";
+}
+?>
+
+<script type="text/javascript">
+var url_root = "<?php echo URL_ROOT; ?>";
+var url_panier = "<?php echo $url_panier; ?>";
+var page = "<?php echo $page; ?>";
+
+
+$(document).ready(function() {
+
+
+  <?php if(in_array($page, array('service-consommateur','notre-concept', 'choix-mode-livraison' ))) {  ?>
+
+
+
+
+  $('#fullpage').fullpage({
+
+      slidesNavigation: false,
+fitToSection : false,
+        verticalCentered: true,
+        autoScrolling : false,
+        fixedElements: '.header-spacer',
+        loopHorizontal: false,
+        paddingTop: '5em',
+        scrollBar: true,
+  animateAnchor: true,
+  });
+  <?php } if($page == 'notre-concept')  { ?>
+
+  window.sr = ScrollReveal({ reset: false, viewOffset: { top: 80 }, delay: 500 });
+  var preveal = {
+    delay    : 400,
+    distance : '0',
+    easing   : 'ease-in-out',
+    scale    : 1.0,
+    origin: 'bottom',
+    duration: 800
+  };
+
+  var preveal2 = {
+    delay    : 400,
+    distance : '50px',
+    easing   : 'ease-in-out',
+    scale    : 1.0,
+    origin: 'bottom',
+    duration: 1200
+  };
+
+  //sr.reveal('.p-reveal', preveal, { duration: 2000 }, 200);
+  //sr.reveal( ".section p", preveal);
+
+  sr.reveal( ".logo-philo", preveal);
+  sr.reveal( ".img-first-signes", preveal);
+  sr.reveal( ".txt-cont-philo h3", preveal);
+
+  /*sr.reveal( "#first p", preveal2);
+  sr.reveal('#first .img-reveal', { duration: 2000, delay : 1000}, 200);*/
+
+  sr.reveal( "#second p", preveal2);
+  sr.reveal('#second .img-reveal', { duration: 2000, delay : 1000}, 200);
+
+  sr.reveal( "#third p", preveal2);
+  /*sr.reveal('#third .img-reveal', { duration: 2000, delay : 1000}, 200);*/
+
+  sr.reveal( "#fourth p", preveal2);
+  sr.reveal('#fourth .img-reveal', { duration: 2000, delay : 1000}, 200);
+  /*sr.reveal('.img-reveal2', { duration: 2000 }, 50);*/
+
+
+
+  <?php  } if($page == 'mon-compte')  { ?>
+    $('#com-list').stacktable({myClass:'list-respo'});
+    <?php } ?>
+
+<?php echo implode("\n", $footer_js['script']); ?>
+
+
+    <?php if(!empty($error)){ ?>
+    $.growl.error({ title: "Erreur", message: "<?php echo addslashes(stripslashes($error)); ?>" });
+    <?php }if(!empty($success)){ ?>
+    $.growl.notice({ title: "Succès", message: "<?php echo addslashes(stripslashes($success)); ?>" });
+    <?php }if(!empty($info)){ ?>
+    $.growl.notice({ title: "Information", message: "<?php echo addslashes(stripslashes($info)); ?>" });
+    <?php } ?>
+});
+
+</script>
+<!--<?php if(IS_WEBMASTER && DEBUG == 1)-->
+<!--{-->
+<!--    echo '<div style="clear:both"></div>';-->
+<!--    foreach($debug_vars as $k)-->
+<!--    {-->
+<!--        echo "<h3>$k</h3>";-->
+<!--        echo '<pre>';-->
+<!--        print_r(${"$k"});-->
+<!--        echo '</pre>';-->
+<!--    }-->
+<!--}-->
+<!--?>-->
+
+<?php if($page == 'mon-compte' || ($shopping_cart['auth_order'] === false && in_array($page, array('choix-mode-livraison', 'boutique', 'panier')))) { ?>
+<script>
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */ (
+        document.getElementById('autocomplete')), {
+        componentRestrictions: {'country': 'fr'},
+        // peut être "address", "establishment", "geocode",  "(regions)" ou "(cities)"
+        types: ['address']
+      });
+
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+// [END region_geolocation]
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNiyCE-lBE5-eLFwqPfCGCa4FNk2ypTWk&libraries=places&callback=initAutocomplete"
+        async defer></script>
+<?php } ?>
+</body>
+</html>
+<!--<?php-->
+<!--if(isset($mysqli))-->
+<!--{-->
+<!--    if(isset($res))-->
+<!--    {-->
+<!--        @$res->free();-->
+<!--    }-->
+<!--    $mysqli->close();-->
+<!--}-->

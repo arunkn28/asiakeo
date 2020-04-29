@@ -1,0 +1,148 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+    {% block title %}
+<title>Title</title>
+    {% endblock title %}
+<meta name="description" value=""/>
+<meta name="keywords" value=""/>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,700i" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/superslides.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.scrollbar.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.growl.css' %}" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fullpage.min.css' %}" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.growl.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.superslides.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.scrollTo.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.fullpage.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/scrollreveal.min.js' %}"></script>
+<!--function selected_menu($page, $url)-->
+<!--{-->
+<!--    $pos = strpos($url, $_SERVER['REQUEST_URI']);-->
+<!--    return $page != 'index' && $pos !== false ? 'selected' : '';-->
+<!--}
+?>-->
+</head>
+<body>
+<!--  <?php if(isset($image_mini) && !empty($image_mini) && isset($image_hd) && !empty($image_hd)){ ?>-->
+
+
+<!--    <div id="splashscreen">-->
+<!--    <div id="splashcontener">-->
+<!--    <button class="close-splash">x</button>-->
+<!--    <div class="splash-inside"><div class="splash-content"></div></div>-->
+<!--    <div class="info-splash">Cette annonce se fermera automatiquement dans <span>10</span> seconde(s)</div>-->
+
+<!--    </div>-->
+<!--    <script>-->
+<!--    $(document).ready(function() {-->
+
+<!--      var $timerSpan = $('.info-splash span'),-->
+<!--          timer = setInterval(function(){ count() }, 1000);-->
+
+<!--      function count() {-->
+<!--        var secondsLeft = $timerSpan.text(),-->
+<!--            newVal = secondsLeft-1;-->
+
+<!--            if(secondsLeft == 0) {-->
+<!--              clearInterval(timer);-->
+<!--              $("#splashscreen").fadeOut('400', function() {-->
+<!--                  $("#splashscreen").remove();-->
+<!--              });-->
+<!--            } else {-->
+<!--              $timerSpan.text(newVal);-->
+<!--          }-->
+<!--      }-->
+<!--      $('.close-splash').on('click', function(event) {-->
+<!--        event.preventDefault();-->
+<!--        $("#splashscreen").fadeOut('400', function() {-->
+<!--            clearInterval(timer);-->
+<!--            $("#splashscreen").remove();-->
+<!--        });-->
+<!--      });-->
+<!--    });-->
+<!--    </script>-->
+<!--    </div>-->
+<!--  <?php } ?>-->
+  <div class="ovs">
+
+  </div>
+  <div class="cont-mw">
+
+  <div class="main" role="main">
+
+<!--<?php if(!in_array($page, array('service-consommateur', 'notre-concept', 'choix-mode-livraison'))){ ?>-->
+
+
+<!--<?php if(!isset($step) || (isset($step) && $step == STEP_PANIER && !isset($_GET['t']))){  ?>-->
+<!--<div class="header-spacer"></div>-->
+<!--<?php }?>-->
+
+
+
+<!--<?php } ?>-->
+
+<header class="clearfix header-main">
+  <div class="contener">
+
+
+<a href="/" class="close-drop"><img src="{% static 'images/logo.png' %}" class="logo-all" /></a>
+
+
+        <ul class="nav-responsive">
+          <li class="logo-respo">
+            <a href="/" class="close-drop"><img src="{% static 'images/logo.png' %}" class="logo-all" /></a>
+          </li>
+            <li><a href="<?php echo $url_boutique; ?>" class=" ">Carte</a></li>
+            <li><a href="<?php echo $url_notre_concept; ?>" class="close-drop">Notre concept</a></li>
+            <li><a href="<?php echo $url_nos_restaurants; ?>" class="close-drop">Nos restaurants</a></li>
+            <li><a href="<?php echo $url_service_consommateur; ?>" class="close-drop">Service consommateur</a></li>
+            <li class="my-acc-respo"><a href="<?php echo $url_mon_compte; ?>" class="close-drop">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a></li>
+        </ul>
+
+
+    <div class="nested-nav close-drop">
+
+      <button class="hamburger hamburger--elastic" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+        <a href="<?php echo $url_mon_compte; ?>" class="account-user">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a>
+				<?php if(!$is_ferme){ ?>
+        <a href="<?php echo $url_panier; ?>" class="panier"><span>Panier</span><sup><?php echo $shopping_cart['nb_total']; ?></sup><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+				<?php } ?>
+        <!-- <a href="<?php echo $url_panier; ?>"><i class="fa fa-shopping-basket" aria-hidden="true"></i> <?php echo isset($shopping_cart['price_total']) && $shopping_cart['price_total'] > 0 ? 'Panier (' . number_format_euro($shopping_cart['price_total']) . ')' : 'Panier vide'; ?></a>-->
+
+    </div>
+    <div class="dropdown-menu">
+        <div class="dropdown-row">
+<!--      <?php-->
+<!--      $dropdown = array('Les Plateaux', 'Formules', 'Californias', 'Sushis', 'Makis', 'Printaniers', 'Rolls', 'Eggs', 'Temakis', 'Sashimi', 'Chirashi', 'Plats chauds');-->
+<!--      foreach($familles_url as $fam_id_tmp => $fam_url_tmp){-->
+
+<!--       if(substr( $familles[$fam_id_tmp], 0, 5 ) != "libre") {-->
+<!--         if(in_array($familles[$fam_id_tmp], $dropdown)) {-->
+<!--         echo  '<div class="drop-item"><a href="'.$fam_url_tmp.'"><img src="'.$famille_produits[$fam_id_tmp]['image'].'" class="preview-img" /><h3>'.ucwords(strtolower($familles[$fam_id_tmp])) .'</h3></a></div>';-->
+<!--         //echo ;-->
+<!--       }-->
+<!--       }-->
+<!--      } ?>-->
+      <div class="clearfix"></div>
+      </div>
+    </div>
+      </div>
+</header>
+      {% block pagebody %}
+      {% endblock pagebody %}
