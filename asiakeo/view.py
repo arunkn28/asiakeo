@@ -10,3 +10,13 @@ class BaseView(View):
 class NotreConcept(BaseView):
     def get(self, request):
         return render(request, 'notre-concept.html')
+
+
+class NosRestuarants(BaseView):
+    def get(self, request):
+        return render(request, 'nos-restaurants.html')
+
+
+class ServiceConsommateur(BaseView):
+    def get(self, request):
+        return render(request, 'service-consommateur.html')

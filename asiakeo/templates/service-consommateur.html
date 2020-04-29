@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Service Conommateur - Asiakeo</title>
+{% endblock title %}
+{% block pagebody %}
+<div id="fullpage">
+  <div class="section choice-intro" data-anchor="demande">
+
+
+<h1><span>Service consommateur</span><br />Afin de sans cesse nous améliorer, notre service consommateur est là pour toute question ou réclamation</h1>
+          <div class="cont-choix-inter contener-page-temp page-question contener clearfix custom-new">
+              <h2>Merci de remplir ce formulaire</h2>
+          <a href="#" class="active_click basket-add visible selected-sc" data-type="Question">Question</a>
+          <a href="#" class="active_click basket-add visible" data-type="Reclamation">Réclamation</a>
+          <a href="#" class="active_click basket-add visible" data-type="Suggestion">Suggestion</a>
+
+
+  <form action="{% url 'service-consommateur'%}" method="post">
+    <input type="hidden" name="type-demande" value='Question' id="type-demande"/>
+
+      <!-- <div class="cont-choix-inter contener-page-temp page-question contener clearfix"> -->
+<div class="hide-select">
+
+
+        <select id="dynamic-options" name="dynamic-options">
+
+
+          <option value="Un produit">Un produit</option>
+          <option value="Un service">Un service</option>
+          <option value="Une livraison" >Une livraison</option>
+          <option value="Un restaurant">Un restaurant</option>
+          <option value="Un paiement">Un paiement</option>
+          <option value="Autre">Autre</option>
+
+        </select>
+    </div>
+
+        <ul>
+          <li><input type="text" name="first_name" id="first_name" value="" size="30" placeholder="Prénom"></li>
+          <li><input type="text" name="last_name" id="last_name" value="" size="30" placeholder="Nom"></li>
+          <li><input type="text" name="email" id="email" value="" size="30" placeholder="Email"></li>
+          <li><input type="text" name="phone" id="phone" value="" size="30" placeholder="Téléphone"></li>
+          <li class="fullwidth"><textarea placeholder="Commentaire" name="commentaire"></textarea></li>
+          <li class="quest-last"><input type="submit" name="send" class="basket-add visible" value="Envoyer"></li>
+      </ul>
+
+
+  </form>
+</div>
+
+</div>
+
+
+ {% include 'footer.html' %}
+</div>
+{% endblock pagebody %}

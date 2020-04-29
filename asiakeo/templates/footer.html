@@ -1,3 +1,4 @@
+{% load static %}
 <!--<?php if(in_array($page, array('panier', 'boutique'))){ ?>-->
 <!--&lt;!&ndash; FORMULE &ndash;&gt;-->
 <!--<div class="overlay overlay-formule">-->
@@ -20,6 +21,7 @@
 <!--  </div>-->
 <!--</div>-->
 <!--<?php } ?>-->
+
 <footer class="section fp-auto-height clearfix">
 
 <div class="inner-foot">
@@ -67,11 +69,13 @@ Retrouvez notre actualité et toutes nos informations sur les réseaux sociaux
         dismiss : "J'ai compris !",
         learnMore : "Plus d'info",
         link : "<?php echo $url_mentions_legales; ?>",
-        theme : "<?php echo URL_CSS; ?>cookies.css"
+        theme : "{% static 'css/cookies.css'%}"
     };
 </script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
 
+
+<!--
 <?php
 $footer_js['file'] = array_unique($footer_js['file']);
 foreach($footer_js['file'] as $js_file)
@@ -79,17 +83,18 @@ foreach($footer_js['file'] as $js_file)
     echo '<script type="text/javascript" src="'.$js_file.'"></script>'."\n";
 }
 ?>
+-->
 
 <script type="text/javascript">
-var url_root = "<?php echo URL_ROOT; ?>";
-var url_panier = "<?php echo $url_panier; ?>";
-var page = "<?php echo $page; ?>";
+<!--var url_root = "<?php echo URL_ROOT; ?>";-->
+<!--var url_panier = "<?php echo $url_panier; ?>";-->
+<!--var page = "<?php echo $page; ?>";-->
 
 
 $(document).ready(function() {
 
 
-  <?php if(in_array($page, array('service-consommateur','notre-concept', 'choix-mode-livraison' ))) {  ?>
+ /* <?php if(in_array($page, array('service-consommateur','notre-concept', 'choix-mode-livraison' ))) {  ?> */
 
 
 
@@ -106,7 +111,7 @@ fitToSection : false,
         scrollBar: true,
   animateAnchor: true,
   });
-  <?php } if($page == 'notre-concept')  { ?>
+  /*<?php } if($page == 'notre-concept')  { ?>*/
 
   window.sr = ScrollReveal({ reset: false, viewOffset: { top: 80 }, delay: 500 });
   var preveal = {
@@ -148,7 +153,7 @@ fitToSection : false,
   /*sr.reveal('.img-reveal2', { duration: 2000 }, 50);*/
 
 
-
+/*
   <?php  } if($page == 'mon-compte')  { ?>
     $('#com-list').stacktable({myClass:'list-respo'});
     <?php } ?>
@@ -162,7 +167,7 @@ fitToSection : false,
     $.growl.notice({ title: "Succès", message: "<?php echo addslashes(stripslashes($success)); ?>" });
     <?php }if(!empty($info)){ ?>
     $.growl.notice({ title: "Information", message: "<?php echo addslashes(stripslashes($info)); ?>" });
-    <?php } ?>
+    <?php } ?> */
 });
 
 </script>
