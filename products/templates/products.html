@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{product_category|title}} - Asiakeo</title>
+{% endblock title %}
+{% block pagebody %}
+
+<!-- DESSERTS et BOISSONS -->
+<div class="overlay overlay-desserboissson">
+  <div class="bloc-pdt-table">
+    <div class="bloc-pdt-cell">
+      <div id="dessertboisson"  class="contener-basket-overlay clearfix">
+        <h2>N'oubliez pas votre dessert ou votre boisson</h2>
+
+        <div class="cont-basket-mini">
+
+
+
+<div class="bloc-pdt">
+<div class="bloc-pdt-abs">
+<div class="bloc-pdt-table">
+<div class="bloc-pdt-cell">
+<figure class="pdt-image">
+<img src="<?php echo $image_rand_desserts; ?>" alt="<?php echo $image_rand_desserts; ?>" />
+<figcaption>
+<ul>
+
+<li><a href="/boutique/desserts/" class="active_click basket-add ">Dessert</a></li>
+</ul>
+
+
+
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div class="bloc-pdt">
+<div class="bloc-pdt-abs">
+<div class="bloc-pdt-table">
+<div class="bloc-pdt-cell">
+<figure class="pdt-image">
+<img src="<?php echo $image_rand_boissons; ?>" alt="<?php echo $image_rand_boissons; ?>" />
+<figcaption>
+<ul>
+
+<li><a href="/boutique/boissons/" class="active_click basket-add modif">Boisson</a></li>
+</ul>
+
+
+
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+          <a href="<?php echo $url_panier ?>" class="active_click basket-add direc">Non merci !</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div id="big-basket">
+<!--    <?php-->
+<!--    require(DIR_TPL . '_panier_localisation.tpl.php');-->
+<!--    //if($shopping_cart['auth_order'] == true){-->
+<!--      require(DIR_TPL . '_panier_lateral.tpl.php');-->
+<!--    //}-->
+<!--    ?>-->
+  </div>
+<div id="ariane-select">
+<p class="ariane-cont">
+  <a href="{% url 'products:category-products' category='les-plateaux' %}">Carte</a><span>&gt;</span>{{product_category|title}}
+</p>
+
+<div class="menu-change-cont">
+
+
+
+
+    <select id="menu-change">
+<!--    <?php-->
+<!--      if($nb_produits_push > 0)-->
+<!--      {-->
+<!--          echo  '<option value="'.$url_produits_du_moment.'">Nouveautés</option>';-->
+<!--      }-->
+
+<!--      foreach($familles_url as $fam_id_tmp => $fam_url_tmp){-->
+<!--        if(substr( $familles[$fam_id_tmp], 0, 5 ) != "libre") {-->
+<!--          echo  '<option value="'.$fam_url_tmp.'"' . ($fam_id_tmp == $fam_id ? 'selected' : '') . '>'.ucwords(strtolower($familles[$fam_id_tmp])) .'</a>';-->
+<!--        }-->
+<!--      }-->
+
+<!--      ?>-->
+        {% for category in categories %}
+        <option value="{{category.name}}" >{{category.name|title}}</option>
+        {% endfor %}
+    </select>
+
+    <div class="column-menu-carte">
+
+      <div class="image-tooltip"></div>
+<!--        <?php-->
+<!--        if($nb_produits_push > 0)-->
+<!--        {-->
+<!--            echo  '<a href="'.$url_nouveautes.'"'. ($push == 1 ? 'class="selected"' : '') .' data-img-pdt="'.$image_fam_nouveaute.'">Nouveautés</a>';-->
+<!--        }-->
+<!--        ?>-->
+
+<!--        <?php  foreach($familles_url as $fam_id_tmp => $fam_url_tmp){-->
+<!--           if(substr( $familles[$fam_id_tmp], 0, 5 ) != "libre") {-->
+<!--             echo  '<a href="'.$fam_url_tmp.'"'. ($fam_id_tmp == $fam_id ? 'class="selected"' : '') .' data-img-pdt="'.$famille_produits[$fam_id_tmp]['image'].'">'.ucwords(strtolower($familles[$fam_id_tmp])) .'</a>';-->
+<!--           }-->
+<!--         } ?>-->
+        {% for category in categories %}
+        <a href="{% url 'products:category-products' category=category.slug %}" data-img-pdt="{{ categoty.image.url }}">{{category.name|title}}</a>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+  <div id="listeproduits" class="clearfix">
+  <form action="<?php echo $url_panier; ?>" method="post">
+      {% csrf_token %}
+      <h2 id="{{product_category}}">{{product_category|title}}</h2>
+<!--      <?php-->
+<!--      foreach($produits as $fam_nom => $fam_detail)-->
+<!--      {-->
+<!--          foreach($fam_detail as $ssfam_nom => $produits)-->
+<!--          {-->
+<!--            if (!empty($ssfam_nom)) {-->
+<!--             echo '<h2 id="'.  clean_url($ssfam_nom).'">'.ucfirst(strtolower($ssfam_nom)).'</h2>';-->
+<!--           } else {-->
+<!--             echo '<h2 id="'.  clean_url($fam_nom).'">'.ucfirst(strtolower($fam_nom)).'</h2>';-->
+<!--           }-->
+<!--              foreach($produits as $produit)-->
+<!--              {-->
+<!--                ?>-->
+                <!-- Debut Schema Product -->
+
+                <div itemscope itemtype="http://schema.org/Product">
+                    <div class="bloc-pdt">
+                        <?php if(!empty($produit['description'])){ ?>
+                        <span class="more-information"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                        <?php } ?>
+                        <div class="bloc-pdt-abs">
+                            <div class="bloc-pdt-table">
+                                <div class="bloc-pdt-cell">
+                                    <figure class="pdt-image">
+                                        <img src="<?php echo $produit['image']; ?>" width="100" itemprop="image" alt="<?php echo $produit['nom']; ?>"/>
+                                        <figcaption>
+                                            <ul id="prod-<?php echo $produit['id']; ?>">
+                                                <li class="pdt-nom"><h3 itemprop="name" ><?php echo $produit['nom']; ?></h3></li>
+                                                <?php if($produit['nb_pieces'] > 0 && $produit['has_formule'] == false){ ?>
+                                                <li class="pdt-pieces"><small>x</small><?php echo $produit['nb_pieces']; ?> Pièces</li>
+                                                <?php } ?>
+
+                                                <li class="pdt-price">
+                                                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                                        <meta itemprop="priceCurrency" content="EUR" />
+                                                        <meta itemprop="price" content="<?php echo $produit['prix_raw']; ?>"><?php echo $produit['prix']; ?>
+                                                        <meta itemprop="availability" href="http://schema.org/InStock" />
+                                                    </div>
+                                                </li>
+																								<?php if(!$is_ferme){ ?>
+                                                <li><button name="add" value="<?php echo $produit['id']; ?>" class="basket-add product-add<?php echo ($produit['has_formule'] ? ' has-formule' : ''); ?>">Ajouter</button></li>
+																							<?php } ?>
+																						</ul>
+
+                                            <meta itemprop="description" content="<?php echo $description; ?>" />
+                                            <meta itemprop="category" content="<?php echo $fam_nom . (!empty($ssfam_nom) ? '>' . $ssfam_nom : ''); ?>" />
+
+                                            <div class="bloc-pdt-table-back">
+                                                <div class="bloc-pdt-table">
+                                                    <div class="bloc-pdt-cell">
+                                                        <h3><?php echo $produit['nom']; ?></h3><br />
+                                                        <span itemprop="description"><?php echo $produit['description']; ?></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Fin Schema Product -->
+                </div>
+                <?php
+              }
+          }
+      }
+      ?>
+      </form>
+  </div>
+  {% include 'footer.html' %}
+</div>
+{% endblock pagebody %}

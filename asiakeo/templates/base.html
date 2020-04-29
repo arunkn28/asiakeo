@@ -26,6 +26,7 @@
 <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.fullpage.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scrollreveal.min.js' %}"></script>
+ <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <!--function selected_menu($page, $url)-->
 <!--{-->
 <!--    $pos = strpos($url, $_SERVER['REQUEST_URI']);-->
@@ -128,6 +129,10 @@
     </div>
     <div class="dropdown-menu">
         <div class="dropdown-row">
+            {% for category in categories%}
+            <div class="drop-item"><a href="#"><img src="{{category.image.url}}" class="preview-img" /><h3>{{category.name|upper}}</h3></a></div>
+            {% endfor %}
+
 <!--      <?php-->
 <!--      $dropdown = array('Les Plateaux', 'Formules', 'Californias', 'Sushis', 'Makis', 'Printaniers', 'Rolls', 'Eggs', 'Temakis', 'Sashimi', 'Chirashi', 'Plats chauds');-->
 <!--      foreach($familles_url as $fam_id_tmp => $fam_url_tmp){-->

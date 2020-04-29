@@ -631,7 +631,7 @@ header .nested-nav .panier:before {
 #ariane-select {
     border-bottom: 1px solid rgb(231, 226, 226);
     position: relative;
-    line-height: 3.375rem;
+    line-height: 9.375rem;
     overflow: hidden;
 }
 
