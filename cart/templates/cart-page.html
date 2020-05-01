@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load common_tags %}
+{% block title %}
+<title>Mon Panier - Asiakeo</title>
+{% endblock title %}
+{% block pagebody %}
+
+
+<!--<?php if($step == STEP_PANIER && !empty($token)){ ?>-->
+<!--  <div id="fullpage">-->
+<!--    <div class="section choice-intro last-step" data-anchor="demande">-->
+
+<!--        <h1><span>Nous avons bien enregistré votre commande.</span><br />-->
+
+
+<!--        <?php if($methode_livraison == MODE_RECUPERATION_RECUPERATION){ ?>-->
+<!--        Vous avez choisi de venir la récupérer <strong><?php echo $date_livraison_str; ?></strong> à notre Restaurant-->
+<!--        <strong><?php echo $restaurant['name']; ?></strong> (<?php echo $restaurant['address']; ?> - <?php echo $restaurant['zip']; ?> <?php echo $restaurant['city']; ?>).-->
+<!--        <?php } else { ?>-->
+<!--            Vous avez choisi d'être livré  <strong><?php echo $date_livraison_str; ?></strong>-->
+<!--        <?php } ?>-->
+<!--      </h1>-->
+
+<!--        <p>-->
+
+<!--        Nous venons de vous envoyer un email reprenant l'ensemble de votre commande (surveillez votre dossier "indésirables" / "SPAM").-->
+<!--        <br /><br />-->
+<!--        Vous pouvez nous contacter via la page <a href="https://asiakeo.benjamin-maxant.com/nos-restaurants.html">Nos restaurants</a> pour toute question au sujet de votre commande.-->
+<!--        <br /><br />-->
+<!--        A très bientôt sur notre site internet ou dans nos restaurants <strong>ASIAKEO</strong> !-->
+<!--    </p>-->
+<!--    <script>$('#fullpage').fullpage({-->
+
+<!--        slidesNavigation: false,-->
+<!--          fitToSection : false,-->
+<!--          verticalCentered: true,-->
+<!--          autoScrolling : false,-->
+<!--          fixedElements: '.header-spacer',-->
+<!--          loopHorizontal: false,-->
+<!--          paddingTop: '5em',-->
+<!--          scrollBar: true,-->
+<!--    animateAnchor: true,-->
+<!--    });</script>-->
+<!--</div>-->
+<!--</div>-->
+<!--<?php-->
+<!--//&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--//                  CONTENU DU PANIER-->
+<!--//&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--?>-->
+<!--<?php }elseif($step == STEP_PANIER){ ?>-->
+
+<div class="content">
+
+<!--  <?php require(DIR_TPL . '_panier_steps.tpl.php'); ?>-->
+
+<div id="votre-panier" class="contener-basket">
+    <h2>Mon panier </h2>
+    {% if cart_details %}
+<!--    <?php if(isset($shopping_cart['nb_total']) && $shopping_cart['nb_total'] > 0) { ?>-->
+
+    <form action="<?php echo $url_panier; ?>" method="post" id="shopping-cart">
+        {% for product in cart_details%}
+<!--      <?php foreach($produits as $produit){ ?>-->
+<!--        <?php-->
+<!--        if($produit['fam'] == FAM_ID_ACCESSOIRES)-->
+<!--        {-->
+<!--            continue;-->
+<!--        }-->
+<!--        ?>-->
+          <div id="ligne-produit-{{product.product.id}}" class="ligne-produit clearfix">
+            <div class="img-produit">
+                <img src="{{ product.product.image.url }}" alt="{{product.product.name}}" height="60">
+<!--                <?php echo '<img src="' .$produit['image_src'].'" alt="'. htmlentities($produit['name']) . '" height="60">'; ?>-->
+            </div>
+
+            <div class="infos-produit">
+                  <div class="name-produit col-q4">
+                      <h3>{{product.product.name}}</h3>
+                      <span>{{product.product.category.name}}
+                          {% if product.product.number_pieces > 0%}
+                           - <small>x</small>{{product.product.number_pieces}} pièces
+                          {% endif %}
+                      </span>
+<!--                      <?php if(!empty($produit['formules_str'])){?>-->
+<!--                      <br />-->
+<!--                      <em style="font-size:0.8em;"><?php echo $produit['formules_str']; ?></em>-->
+<!--                      <?php } ?>-->
+                  </div>
+
+                  <div class="qte-produit col-q3">
+                    <a href="#" data-idpdt="{{product.product.id}}" id="btn-left-{{product.product.id}}" data-value="-1" class="modifQte less"><span>-</span></a>
+                    <span class="qtePdt" id="qte-{{product.product.id}}">{{product.quantity}}</span>
+                    <a href="#" data-idpdt="{{product.product.id}}" id="btn-right-{{product.product.id}}" data-value="1" class="modifQte more"><span>+</span></a>
+                      <input type="hidden" id="quantities-{{product.product.id}}" name="quantities[{{product.product.id}}]" class="select_quantity" value="{{product.quantity}}" />
+                  </div>
+
+                  <div id="price-produit-{{product.product.id}}" class="price-produit col-q3">
+                     {% multiply product.quantity product.price %}
+                  </div>
+
+                  <div class="delete-produit col-q5">
+                    <a href="<?php echo $produit['url_delete']; ?>" title="Supprimer" class="suppR">×</a>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+<!--      <?php } ?>-->
+
+<!--        <input type="hidden" name="update_prods" value="Mettre à jour"/>-->
+<!--        &lt;!&ndash; <input type="submit" name="send" value="Valider" class="bnt-wider" /> &ndash;&gt;-->
+    </form>
+    {% else %}
+
+        <div id="shopping_cart_empty">
+            <p>Votre panier est vide</p>
+        </div>
+  {% endif %}
+</div>
+
+<?php if(count($produits_offerts_real) != 0 && !empty($accessoires_offerts_str)) { ?>
+
+<div id="accessoires-offerts" class="contener-basket clearfix">
+    <h2>Accessoires offerts</h2>
+    <form action="<?php echo $url_panier; ?>#accessoires" method="post" id="produits_offerts">
+        <?php echo $accessoires_offerts_str; ?>
+    </form>
+</div>
+
+<?php } ?>
+
+
+<div id="accessoires" class="contener-basket clearfix">
+    <h2>Accessoires supplémentaires</h2>
+
+    <form action="<?php echo $url_panier; ?>#accessoires" method="post">
+    <?php $total_tmp = 0; ?>
+    <?php foreach($accessoires as $accessoire_id => $accessoire){ ?>
+      <?php
+      $total_tmp += $accessoire['price_total'];
+
+      // Produits offerts
+      $nb_offerts = 0; $nb_offerts_str = $nb_offerts_info = '';
+      if(isset($accessoires_offerts[$accessoire_id]))
+      {
+          $accessoire['nb'] -= $accessoires_offerts[$accessoire_id]['nb'];
+      }
+      ?>
+      <div class="mini-products-basket">
+        <?php echo '<img src="' .$accessoire['image_src'].'" alt="'. htmlentities($accessoire['name']) . '" height="60">'; ?>
+            <h3><?php echo $accessoire['name']; ?></h3>
+
+            <a href="#" data-idpdt="<?php echo $accessoire['id']; ?>" id="btn-left-<?php echo $accessoire['id']; ?>" data-value="-1" class="modifQte btn-left accessoire<?php echo $accessoire['nb'] == 0 ? ' btn-disabled' : ''; ?>"><span>-</span></a>
+            <span class="qtePdt" id="qte-<?php echo $accessoire['id']; ?>" data-offert="0"><?php echo $accessoire['nb']; ?></span>
+            <a href="#" data-idpdt="<?php echo $accessoire['id']; ?>" id="btn-right-<?php echo $accessoire['id']; ?>" data-value="1" class="modifQte btn-right accessoire"><span>+</span></a>
+            <div class="clearfix"></div>
+            <?php echo $nb_offerts_str; ?>
+            <input type="hidden" id="accessoire-<?php echo $accessoire['id']; ?>" name="accessoires[<?php echo $accessoire['id']; ?>]" class="select_quantity" value="<?php echo $accessoire['nb']; ?>" />
+          </div>
+
+    <?php } ?>
+    <input type="hidden" name="maj_accessoires" value="Mettre à jour" class=" bnt-wider" />
+  </form>
+    <div class="mini-products-basket">
+        <div class="price-checkout-span">
+            <span>+<?php echo number_format_euro($total_tmp); ?></span>
+        </div>
+    </div>
+</div>
+
+
+<!-- MES CRITERES -->
+<div id="mes-criteres" class="contener-basket">
+  <div class="cont-basket">
+  <?php require(DIR_TPL . '_panier_localisation.tpl.php'); ?>
+    </div>
+</div>
+
+
+<!-- MON COMPTE -->
+<?php if(!isset($_SESSION['customer']['id'])){  ?>
+<div id="compte" class="contener-basket">
+  <h2>Mon compte</h2>
+    <?php require(DIR_TPL . 'customer_connexion_new.tpl.php'); ?>
+  </div>
+<?php } ?>
+
+<!-- FINALISER LA COMMANDE -->
+<p class="price-total-steps responsive-total">
+  Total : <span><?php echo number_format_euro($shopping_cart['price_total']); ?></span>
+</p>
+<div id="finaliser" class="contener-basket">
+  <h2>Finaliser la commande</h2>
+
+
+
+    <div class="mini-products-basket"><h4>Nombre de produits : <span id="panier_nb_total"><?php echo $shopping_cart['nb_total']; ?></span></h4></div>
+
+
+    <div class="mini-products-basket"><h4>Nombre de pièces : <span id="panier_total_nb_pieces"><?php echo $shopping_cart['total_nb_pieces']; ?></span></h4></div>
+
+
+    <div class="mini-products-basket"><h4>Total : <span id="panier_price_total"><?php echo number_format_euro($shopping_cart['price_total']); ?></span></h4></div>
+
+
+
+    <?php if($show_button_valid_command == false){ ?>
+      <p style="color:red"><?php echo $error_commande; ?></p>
+    <?php } else{ ?>
+    <form action="<?php echo $url_panier; ?>" method="post">
+        <input type="hidden" name="step" value="<?php echo STEP_RECAPITULATIF; ?>" />
+
+        Veuillez indiquer votre mode de réglement :
+        <?php
+        foreach($methodes_paiement_str as $methodes_paiement_id_tmp => $methodes_paiement_label_tmp)
+        {
+            echo '<label>';
+            if(isset($is_mobile) && $is_mobile === true)
+            {
+                echo $methodes_paiement_label_tmp;
+                echo ' ';
+                echo '<input type="radio" name="methode_paiement" value="'.$methodes_paiement_id_tmp.'" />';
+            }
+            else
+            {
+                echo '<input type="radio" name="methode_paiement" value="'.$methodes_paiement_id_tmp.'" /> ' . $methodes_paiement_label_tmp;
+            }
+            echo '</label>';
+            echo '&nbsp;&nbsp;';
+        }
+        ?>
+        <br />
+        <?php 
+        if(isset($shopping_cart['mode_selection']) && $shopping_cart['mode_selection'] == MODE_RECUPERATION_LIVRAISON)
+        {
+            ?>
+            <br />
+            Instructions de livraison : digicode, nom différent à l'interphone, ...<br />
+            <textarea name="instructions" style="width:100%;"><?php echo isset($shopping_cart['address_panier']['instructions']) ? $shopping_cart['address_panier']['instructions'] : ''; ?></textarea>
+            <?php
+        }
+        ?>
+        <!-- <label><input type="checkbox" name="cgv" /> En cochant cette case, je déclare avoir lu et accepté les <a href="javascript:void(0);">Conditions Générales de Vente</a></label> -->
+
+
+          <input type="submit" name="send" value="Valider ma commande"  class="basket-add visible"/>
+
+    </form>
+    <?php } ?>
+</div>
+</div>
+<?php } ?>
+
+{% include 'footer.html' %}
+</div>
+{% endblock pagebody %}
+
