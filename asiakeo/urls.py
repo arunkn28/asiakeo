@@ -25,6 +25,7 @@ urlpatterns = [
     path('notre-concept/', NotreConcept.as_view(), name='notre-concept'),
     path('nos-restaurants/', NosRestuarants.as_view(), name='nos-restaurants'),
     path('service-consommateur/', ServiceConsommateur.as_view(), name='service-consommateur'),
+    path('', include('account.urls')),
     path('', TemplateView.as_view(template_name='index.html')),
     path('boutique/', include('products.urls')),
 ]

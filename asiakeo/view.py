@@ -2,6 +2,7 @@ from django.views import View
 from django.shortcuts import render
 from products.models import Category
 
+
 class BaseView(View):
     def __init__(self):
         self.context_dict = {}

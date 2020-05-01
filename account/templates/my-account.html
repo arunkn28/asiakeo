@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Mon Compte - Asiakeo</title>
+{% endblock title %}
+{% block pagebody %}
+<div class="content">
+
+
+  <div class="content clearfix">
+    <!-- <div id="big-basket"> -->
+<!--      <?php-->
+<!--        // require(DIR_TPL . '_panier_lateral.tpl.php');-->
+<!--        // require(DIR_TPL . '_panier_localisation.tpl.php');-->
+<!--      ?>-->
+    <!-- </div> -->
+    <div class="left">
+
+    <div class="contener-basket clearfix">
+<!--      <?php-->
+<!--      }-->
+<!--      elseif($page == 'panier')-->
+<!--      {-->
+<!--        if($show_fil_ariane){-->
+<!--          require(DIR_TPL . '_panier_steps.tpl.php');-->
+<!--        }-->
+<!--      }-->
+<!--      ?>-->
+  		<div class="custom-new my-account clearfix">
+<!--        <?php if($page == 'mon-compte')-->
+<!--          { ?>-->
+            <h2>Connexion</h2>
+<!--          <?php } else {?>-->
+<!--            <h3>Connexion</h3>-->
+<!--          <?php } ?>-->
+
+
+
+        <form action="{% url 'account:mon-compte'%}" id="form_customer_connection" class="form-horizontal style-form" method="post">
+          {% csrf_token %}
+<!--          <input type="hidden" name="action" value="connection" />-->
+<!--          <input type="hidden" name="redirect" value="<?php echo $redirect?>" />-->
+          <ul class="clearfix">
+            <li><input type="text" name="connection_email" id="connection_email"placeholder="Email" value="" size="30" /></li>
+            <li><input type="password" name="connection_pass" id="connection_pass" size="30" placeholder="Mot de passe"/></li>
+            <li><input type="submit" value="Connexion" class="basket-add visible" /></li>
+          </ul>
+
+        </form>
+
+
+
+
+
+
+      </div>
+<!--      <?php if($page == 'mon-compte')-->
+<!--      { ?>-->
+        </div>
+        <div class="contener-basket clearfix">
+<!--      <?php } ?>-->
+
+
+      <div class="custom-new mdp-forgot clearfix" class="clearfix">
+
+<!--        <?php if($page == 'mon-compte')-->
+<!--          { ?>-->
+            <h2>Mot de passe oublié</h2>
+<!--          <?php } else {?>-->
+<!--            <h3>Mot de passe oublié</h3>-->
+<!--          <?php } ?>-->
+      <form action="<?php echo $url_mon_compte ?>" method="post" id="form_compte">
+<!--        <input type="hidden" name="action" value="lost" />-->
+<!--        <input type="hidden" name="redirect" value="<?php echo $redirect?>" />-->
+        <ul>
+          <li><input type="text" name="email" id="email" value="" size="30" class="validate[required,custom[email]]" placeholder="Indiquez votre Email"/></li>
+          <li ><input type="submit" name="send" value="Valider" class="basket-add visible"/></li>
+        </ul>
+      </form>
+
+      </div>
+
+<!--      <?php if($page == 'mon-compte')-->
+<!--      { ?>-->
+        </div>
+        </div>
+        <div class="right">
+
+
+        <div class="contener-basket clearfix">
+<!--      <?php } ?>-->
+
+
+      <div class="custom-new new-account clearfix">
+<!--        <?php if($page == 'mon-compte')-->
+<!--        { ?>-->
+          <h2>Nouveau compte</h2>
+          <form action="{% url 'account:signup' %}" id="form_customer_new" class="form-horizontal style-form" method="post">
+              {% csrf_token %}
+<!--            <input type="hidden" name="action" value="new" />-->
+<!--            <input type="hidden" name="redirect" value="<?php echo $redirect?>" />-->
+            <ul>
+              <li><input type="text" name="first_name" id="first_name" value="" size="30" placeholder="Prénom"/></li>
+              <li><input type="text" name="last_name" id="last_name" value="" size="30" placeholder="Nom"/></li>
+              <li><input type="text" name="phone" id="phone" value="" size="30" placeholder="Téléphone"/></li>
+              <li><input type="text" name="email" id="email" value="" size="30" placeholder="Email"/></li>
+              <li><input type="password" name="pass1" id="pass1" size="30" placeholder="Mot de passe "/></li>
+              <li><input type="password" name="pass2" id="pass2" size="30" placeholder="Retappez votre mot de passe "/></li>
+              <li style="clear:left;width:100%;">Si vous souhaitez vous faire livrer, veuillez indiquer votre adresse ci-dessous : </li>
+              <li style="display:none;"></li>
+              <li>
+                    <input type="text" id="autocomplete" name="autocomplete-address" placeholder="Veuillez indiquer votre adresse" value="" style="width:100%"></input>
+
+                    <input type="hidden" class="field" id="street_number" name="street_number" disabled="true"></input>
+                    <input type="hidden" class="field" id="route" name="route" disabled="true"></input>
+                    <input type="hidden" class="field" id="locality" name="locality" disabled="true"></input>
+                    <input type="hidden" class="field" id="administrative_area_level_1" name="administrative_area_level_1" disabled="true"></input>
+                    <input type="hidden" class="field" id="postal_code" name="postal_code" disabled="true"></input>
+                    <input type="hidden" class="field" id="country" name="country" disabled="true"></input>
+                </li>
+              
+              
+              <!--<li><input type="text" name="address_1" id="address_1" value="<?php echo $address_1; ?>" size="30" placeholder="Adresse"/></li>-->
+              <li><input type="text" name="address_2" id="c" value="" size="30" placeholder="Complément d'adresse (bâtiment, ...)"/></li>
+              <li class="fullwad"><textarea name="instructions" placeholder="Instructions concernant la livraison : digicode, nom différent à l'interphone, ..."></textarea></li>
+              <!--<li><input type="text" name="zip" id="zip" value="<?php echo $zip; ?>" size="30" placeholder="Code postal"/></li>-->
+              <!--<li>
+                <select name="ville_id">
+                  <?php
+                    foreach($villes as $ville_id_tmp => $ville_nom_tmp)
+                    {
+                      echo '<option value="'.$ville_id_tmp.'"' . ($ville_id_tmp == $ville_id ? 'selected="selected"' : '') . '>';
+                      echo $ville_nom_tmp;
+                      echo '</option>';
+                    }
+                  ?>
+                </select>
+              </li> -->
+              
+              <li><input type="submit" class="basket-add visible" value="Créer mon compte" /></li>
+            </ul>
+          </form>
+          
+          
+<!--        <?php } else {?>-->
+          <h3>Nouveau compte</h3>
+          Vous n'avez pas de compte ? <a href="<?php echo $url_mon_compte . ARG_URL . 'redirect=' . urlencode(str_replace(URL_ROOT, '', $url_panier)); ?>" class="basket-add visible" style="margin-right: 5px;">Créez-en un</a>
+          <br />
+          Si vous souhaitez être livré sur votre lieu de travail, merci de renseigner le nom de la société dans le complément d'adresse.
+<!--        <?php } ?>-->
+          
+      </div>
+<!--      <?php
+        if($page == 'mon-compte')-->
+<!--        {-->
+<!--        ?>-->
+        </div>
+      </div>
+
+  {% include 'footer.html' %}
+</div>
+
+{% endblock pagebody %}

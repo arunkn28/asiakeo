@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products'
+    'products',
+    'siteconfigurations',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries':{
+            'common_tags': 'common.templatetags.common_tags',
+
+            }
         },
     },
 ]

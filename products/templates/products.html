@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load common_tags %}
 {% block title %}
 <title>{{product_category|title}} - Asiakeo</title>
 {% endblock title %}
@@ -148,44 +148,45 @@
 <!--              {-->
 <!--                ?>-->
                 <!-- Debut Schema Product -->
-
+            {% for product in products %}
                 <div itemscope itemtype="http://schema.org/Product">
                     <div class="bloc-pdt">
-                        <?php if(!empty($produit['description'])){ ?>
+<!--                        <?php if(!empty($produit['description'])){ ?>-->
                         <span class="more-information"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                        <?php } ?>
+<!--                        <?php } ?>-->
                         <div class="bloc-pdt-abs">
                             <div class="bloc-pdt-table">
                                 <div class="bloc-pdt-cell">
                                     <figure class="pdt-image">
-                                        <img src="<?php echo $produit['image']; ?>" width="100" itemprop="image" alt="<?php echo $produit['nom']; ?>"/>
+                                        <img src="{{product.image.url}}" width="100" itemprop="image" alt="{{product.name}}"/>
                                         <figcaption>
-                                            <ul id="prod-<?php echo $produit['id']; ?>">
+                                            <ul id="{{product.id}}">
                                                 <li class="pdt-nom"><h3 itemprop="name" ><?php echo $produit['nom']; ?></h3></li>
-                                                <?php if($produit['nb_pieces'] > 0 && $produit['has_formule'] == false){ ?>
-                                                <li class="pdt-pieces"><small>x</small><?php echo $produit['nb_pieces']; ?> Pièces</li>
-                                                <?php } ?>
-
+<!--                                                <?php if($produit['nb_pieces'] > 0 && $produit['has_formule'] == false){ ?>-->
+                                                {% if product.number_pieces > 0 %}
+                                                <li class="pdt-pieces"><small>x</small>{{product.number_pieces}} Pièces</li>
+<!--                                                <?php } ?>-->
+                                                {% endif %}
                                                 <li class="pdt-price">
                                                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                                         <meta itemprop="priceCurrency" content="EUR" />
-                                                        <meta itemprop="price" content="<?php echo $produit['prix_raw']; ?>"><?php echo $produit['prix']; ?>
+                                                        <meta itemprop="price" content="{{product.price}}">{{product.price|price}}&euro;
                                                         <meta itemprop="availability" href="http://schema.org/InStock" />
                                                     </div>
                                                 </li>
-																								<?php if(!$is_ferme){ ?>
-                                                <li><button name="add" value="<?php echo $produit['id']; ?>" class="basket-add product-add<?php echo ($produit['has_formule'] ? ' has-formule' : ''); ?>">Ajouter</button></li>
-																							<?php } ?>
-																						</ul>
+                                               {% if not website_closed %}
+                                                <li><button name="add" value="{{product.id}}" class="basket-add product-add">Ajouter</button></li>
+                                                {% endif %}
+                                            </ul>
 
-                                            <meta itemprop="description" content="<?php echo $description; ?>" />
-                                            <meta itemprop="category" content="<?php echo $fam_nom . (!empty($ssfam_nom) ? '>' . $ssfam_nom : ''); ?>" />
+                                            <meta itemprop="description" content="{{product.description}}" />
+                                            <meta itemprop="category" content="{{product.category.name}}" />
 
                                             <div class="bloc-pdt-table-back">
                                                 <div class="bloc-pdt-table">
                                                     <div class="bloc-pdt-cell">
-                                                        <h3><?php echo $produit['nom']; ?></h3><br />
-                                                        <span itemprop="description"><?php echo $produit['description']; ?></span>
+                                                        <h3>{{product.name}}</h3><br />
+                                                        <span itemprop="description">{{product.description}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,11 +198,12 @@
                     </div>
                 <!-- Fin Schema Product -->
                 </div>
-                <?php
+                 {% endfor %}
+<!--                <?php
               }
           }
       }
-      ?>
+      ?>-->
       </form>
   </div>
   {% include 'footer.html' %}

@@ -104,11 +104,11 @@
           <li class="logo-respo">
             <a href="/" class="close-drop"><img src="{% static 'images/logo.png' %}" class="logo-all" /></a>
           </li>
-            <li><a href="<?php echo $url_boutique; ?>" class=" ">Carte</a></li>
+            <li><a href="{% url 'products:category-products' category='les-plateaux' %}" class=" ">Carte</a></li>
             <li><a href="{% url 'notre-concept'%}" class="close-drop">Notre concept</a></li>
             <li><a href="{%url 'nos-restaurants'%}" class="close-drop">Nos restaurants</a></li>
             <li><a href="{%url 'service-consommateur'%}" class="close-drop">Service consommateur</a></li>
-            <li class="my-acc-respo"><a href="<?php echo $url_mon_compte; ?>" class="close-drop">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a></li>
+            <li class="my-acc-respo"><a href="{% url 'account:mon-compte'%}" class="close-drop">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a></li>
         </ul>
 
 
@@ -120,7 +120,7 @@
         </span>
       </button>
 
-        <a href="<?php echo $url_mon_compte; ?>" class="account-user">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a>
+        <a href="{% url 'account:mon-compte'%}" class="account-user">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a>
 				<?php if(!$is_ferme){ ?>
         <a href="<?php echo $url_panier; ?>" class="panier"><span>Panier</span><sup><?php echo $shopping_cart['nb_total']; ?></sup><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
 				<?php } ?>

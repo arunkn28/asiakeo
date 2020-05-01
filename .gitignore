@@ -112,3 +112,4 @@ sent_emails/
 media/
 staticfiles/
 db.sqlite3
+*.xml
