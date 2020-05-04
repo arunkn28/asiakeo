@@ -112,6 +112,9 @@
     <div class="column-menu-carte">
 
       <div class="image-tooltip"></div>
+        {% for category in categories%}
+        <a href="#" data-img-pdt="{{category.image.url}}"></a>
+        {% endfor %}
 <!--        <?php-->
 <!--        if($nb_produits_push > 0)-->
 <!--        {-->
@@ -125,7 +128,7 @@
 <!--           }-->
 <!--         } ?>-->
         {% for category in categories %}
-        <a href="{% url 'products:category-products' category=category.slug %}" data-img-pdt="{{ categoty.image.url }}">{{category.name|title}}</a>
+        <a href="{% url 'products:category-products' category=category.slug %}" data-img-pdt = "{{ category.image.url }}">{{category.name|title}}</a>
         {% endfor %}
     </div>
     </div>
@@ -161,7 +164,7 @@
                                         <img src="{{product.image.url}}" width="100" itemprop="image" alt="{{product.name}}"/>
                                         <figcaption>
                                             <ul id="{{product.id}}">
-                                                <li class="pdt-nom"><h3 itemprop="name" ><?php echo $produit['nom']; ?></h3></li>
+                                                <li class="pdt-nom"><h3 itemprop="name" >{{product.name}}</h3></li>
 <!--                                                <?php if($produit['nb_pieces'] > 0 && $produit['has_formule'] == false){ ?>-->
                                                 {% if product.number_pieces > 0 %}
                                                 <li class="pdt-pieces"><small>x</small>{{product.number_pieces}} Pièces</li>

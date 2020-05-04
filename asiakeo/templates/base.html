@@ -121,9 +121,9 @@
       </button>
 
         <a href="{% url 'account:mon-compte'%}" class="account-user">Mon compte<i class="fa fa-user" aria-hidden="true"></i></a>
-				<?php if(!$is_ferme){ ?>
-        <a href="<?php echo $url_panier; ?>" class="panier"><span>Panier</span><sup><?php echo $shopping_cart['nb_total']; ?></sup><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-				<?php } ?>
+				{% if not website_closed %}
+        <a href="{% url 'cart:cart' %}" class="panier"><span>Panier</span><sup><?php echo $shopping_cart['nb_total']; ?></sup><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+				{% endif %}
         <!-- <a href="<?php echo $url_panier; ?>"><i class="fa fa-shopping-basket" aria-hidden="true"></i> <?php echo isset($shopping_cart['price_total']) && $shopping_cart['price_total'] > 0 ? 'Panier (' . number_format_euro($shopping_cart['price_total']) . ')' : 'Panier vide'; ?></a>-->
 
     </div>
